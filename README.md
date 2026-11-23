@@ -30,10 +30,11 @@ Built November 23, 2026. All assets are local; nothing hotlinks The Knot.
 - Venue photo (c457eb73) and wedding-party closing photo (292bae5f) downloaded
   from media-api.xogrp.com.
 - Gallery: 65 photos, UUID list in /tmp/gallery.txt, in gallery order.
-  Thumbnails verified 65/65 as real image/jpeg (13-27 KB each) and full-size
-  versions verified 65/65 as real JPEG (all over 50 KB). Thumbnails live in
-  `images/gallery/gallery-NN.jpg`, full-size lightbox images in
-  `images/gallery/full/gallery-NN.jpg`.
+  Full-size versions verified 65/65 as real JPEG (all over 50 KB) and live in
+  `images/gallery/full/gallery-NN.jpg`. The Photos page uses the full-size
+  files for both the grid (square-cropped by CSS, lazy-loaded) and the
+  lightbox; the smaller 300px thumbnails were dropped at deploy time to keep
+  the upload to one set of files.
 - Registry: 18 gift items, prices, and statuses came from the live browser visit
   of the original registry page, not from the text crawl (the crawl rendered
   the registry empty). Store attribution per item (The Knot Registry Store /
