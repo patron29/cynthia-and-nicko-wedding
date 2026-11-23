@@ -1,64 +1,59 @@
-# Cynthia & Nicko — Wedding Website Archive
+# Cynthia & Nicko — Wedding Website, v2 Exact-Replica Build
 
-Personal archive copy of the wedding website of Cynthia Espinoza and Nicko Patron,
-originally at https://www.theknot.com/us/cynthia-espinoza-and-nicko-patron-aug-2025
-Wedding: Friday, August 29, 2025, 5:00–11:00 PM, The View at Bluemont,
-19729 Ridgeside Road, Bluemont, VA 20135. Archived November 23, 2026.
+Multi-page static replica of https://www.theknot.com/us/cynthia-espinoza-and-nicko-patron-aug-2025
+(Cynthia Espinoza and Nicko Patron, Friday, August 29, 2025, The View at Bluemont).
+Built November 23, 2026. All assets are local; nothing hotlinks The Knot.
 
-## What was copied
+## Structure (URLs match the original paths)
 
-Source pages were read on 2026-11-23 (all confirmed live that day) and their
-text was copied verbatim into this single-page static site (`index.html`,
-`styles.css`). No The Knot branding, logos, or navigation chrome was copied.
-The design is a simple, clean original layout.
+- `index.html` — Home
+- `our-story/index.html` — Our Story, 19 milestones
+- `photos/index.html` — Photos, 65-photo grid with lightbox
+- `wedding-party/index.html` — Wedding Party, 12 people
+- `q-a/index.html` — Q + A, 9 questions
+- `travel/index.html` — Travel, Dulles and Reagan
+- `things-to-do/index.html` — Things to Do
+- `registry/index.html` — Registry, 18 gifts with working filters and sort
+- `rsvp/index.html` — RSVP overlay flow (no form submission; archive note on submit)
+- `styles.css` — shared stylesheet
 
-| Section | Source page | Status |
-|---|---|---|
-| Home | `/` | Copied in full: date, venue, attire, white-dress note, reception, banner + venue photos |
-| Our Story | `/our-story` | Copied in full: all 19 milestones (2013 meet → 2024 proposal) with text and all 23 photos |
-| Photos | `/photos` | Partial — see below |
-| Wedding Party | `/wedding-party` | Copied in full: 6 bridesmaids + 6 groomsmen, names, roles, bios, all 13 photos |
-| Q + A | `/q-a` | Copied in full: all 9 questions and answers |
-| Travel | `/travel` | Copied in full: Dulles + Reagan National airports with addresses, phones, drive times |
-| Things to Do | `/things-to-do` | Copied as-is: the page only said "Things to Do coming soon!" |
-| Registry | `/registry` | Not readable — see below |
-| RSVP | `/rsvp` | Not readable as a form (and past deadline) — presented as archive text only, no form, nothing submits anywhere |
+## Sources
 
-## Photos
+- All text content (Home, Our Story, Wedding Party bios, Q+A, Travel, Things to Do)
+  is verbatim from the live text crawl of the original site, reused from the v1
+  clone (`~/workspace/wedding-site-clone/index.html`).
+- Header images: watercolor floral spray (33daf297) and hanging garland (bc099c1a),
+  downloaded from media-api.xogrp.com. Hero photo is the same UUID as the
+  original hero (c824c2a6); theknot.com/tk-media is Akamai-blocked to curl, so it
+  was fetched via the media-api.xogrp.com mirror of the same UUID and cropped to
+  the original 2:1 crop (top half, 2880x1440).
+- Venue photo (c457eb73) and wedding-party closing photo (292bae5f) downloaded
+  from media-api.xogrp.com.
+- Gallery: 65 photos, UUID list in /tmp/gallery.txt, in gallery order.
+  Thumbnails verified 65/65 as real image/jpeg (13-27 KB each) and full-size
+  versions verified 65/65 as real JPEG (all over 50 KB). Thumbnails live in
+  `images/gallery/gallery-NN.jpg`, full-size lightbox images in
+  `images/gallery/full/gallery-NN.jpg`.
+- Registry: 18 gift items, prices, and statuses came from the live browser visit
+  of the original registry page, not from the text crawl (the crawl rendered
+  the registry empty). Store attribution per item (The Knot Registry Store /
+  Amazon / Etsy) is a best-effort assignment from that same visit so the Store
+  filter has something to filter on; it was not independently verifiable per
+  item. No outbound purchase links were verifiable, so "Add to cart" buttons
+  are presentational only and no data is sent anywhere.
+- RSVP: the original RSVP page rendered empty in the text crawl; the flow
+  (full-screen overlay, progress bar, Full Name field, "Find Your Invitation")
+  was replicated from the live browser visit. Submitting shows an archive note
+  that RSVPs closed May 31, 2025 and the wedding has taken place. Nothing is
+  submitted anywhere.
 
-40 image files saved locally in `images/` (13 MB total), all downloaded from
-The Knot's media CDNs (`theknot.com/tk-media` and `media-api.xogrp.com`) at
-the quality the source pages served. Nothing is hotlinked to The Knot.
+## Known differences from the original
 
-- `banner.jpg` — homepage banner; `theme-1.png`, `theme-2.jpg` — theme images
-- `venue.jpg` — The View at Bluemont photo from the homepage
-- `story-01` … `story-23` — all Our Story photos, in page order
-- `party-alejandra.jpg`, `party-faviola.jpg`, `party-claudia.jpg`,
-  `party-cadence.jpg`, `party-carolina.jpg`, `party-jen.jpg`,
-  `party-mohmeet.jpg`, `party-jared.jpg`, `party-aaron.jpg`,
-  `party-rory.jpg`, `party-james.jpg`, `party-abraham.jpg`, `party-group.jpg`
-
-## What could not be captured (honest gaps)
-
-1. **Photo gallery (66 photos):** the `/photos` page lists 66 gallery photos
-   (Gallery Photo 1–66), but the text crawl of the page and of individual
-   photo pages (`/photos/<id>`) never exposed their image URLs, and direct
-   fetches of theknot.com pages are blocked by Akamai (HTTP 403, "Access
-   Denied"). The Photos section here therefore reuses the 40 saved photos
-   (banner, venue, story, wedding party) as the gallery. If the couple still
-   has the originals, they can be added to `images/` and the gallery grid.
-2. **Registry links:** the `/registry` page rendered empty in the text crawl
-   (its content loads via JavaScript). No registry retailer or link could be
-   verified, so none is listed here; the page links back to the original
-   registry URL instead.
-3. **RSVP form:** the `/rsvp` page rendered empty in the text crawl. The
-   wedding already happened and the RSVP deadline (May 31, 2025, per Q&A)
-   had passed, so no form was rebuilt. The RSVP deadline is preserved in
-   the Q&A section.
-
-## Deployment
-
-Deployed to Vercel as a static site (see project name / URL in the delivery
-report). To redeploy: create a Vercel project from this folder as a static
-site (no build command) or run a static deploy of `index.html`,
-`styles.css`, and `images/`.
+- The Knot's own branding/navigation chrome is not reproduced beyond the
+  footer "Created on The Knot" credit. The site is a personal copy, not The
+  Knot itself.
+- Fonts: Cormorant Garamond (Google Fonts) is used as the closest match to The
+  Knot's Didone-style serif; the exact licensed font files were not available.
+- The original 66-photo gallery count seen in the text crawl vs 65 verified
+  gallery UUIDs: the gallery list used here is the 65 UUIDs verified with curl.
+- Registry item images were not captured; gift cards use text only.
